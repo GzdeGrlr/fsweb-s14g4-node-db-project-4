@@ -1,16 +1,20 @@
 const express = require("express");
+
+const tarifRouter = require("./tarifler/tarifler-router");
+
 const server = express();
 
 server.use(express.json());
 
-const recipesRouter = require("./recipes/recipes-router");
+server.use("/api/tarifler", tarifRouter);
 
-server.use("/api/recipes", recipesRouter);
-
-server.use("*", (req, res) => {
-  res.status(404).json({
-    message: "Not found",
-  });
-});
+server.use(
+  ("*",
+  (req, res) => {
+    res.status(404).json({
+      message: "Not Found",
+    });
+  })
+);
 
 module.exports = server;
